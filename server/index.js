@@ -9,13 +9,17 @@ connectDB();
 const app = express();
 
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: ['http://localhost:5173',process.env.CLIENT_URL] ,
   credentials: true
 }));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/uploads', express.static('uploads'));
+
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok' });
+});
 
 // Routes
 app.use('/api/auth', require('./routes/authRoutes'));
