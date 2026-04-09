@@ -9,7 +9,11 @@ connectDB();
 const app = express();
 
 app.use(cors({
-  origin: ['http://localhost:5173', 'https://packaging-dashboard-nv23.vercel.app'],
+  origin: [
+    'http://localhost:5173',
+    'https://packaging-dashboard-olive.vercel.app',
+    process.env.CLIENT_URL,
+  ].filter(Boolean),
   credentials: true
 }));
 
